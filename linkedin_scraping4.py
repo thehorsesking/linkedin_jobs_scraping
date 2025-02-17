@@ -19,7 +19,7 @@ import winsound
 #get login details from txt file
 def login_details():
     #open txt password file
-    with open("rewahad_linkedin_password.txt",'r') as f:
+    with open("linkedin_password.txt",'r') as f:
         info = f.read().split("\n")
 
     email = info[0]
@@ -29,12 +29,10 @@ def login_details():
 
 #read previous files for job_ids that were completed
 def previous_file():
-    df1 = pd.read_csv('jobs_20250207_114818.csv')
-    df2 = pd.read_csv('jobs_20250207_165729.csv')
-    df3 = pd.read_csv('jobs_20250208_095940.csv')
-    df4 = pd.read_csv('jobs_20250208_101102.csv')
+    df1 = pd.read_csv('jobs_20250207_114818.csv') #add your previously scraped files here
+    df2 = pd.read_csv('jobs_20250207_114818.csv') #add your previously scraped files here
     
-    previous_file = pd.concat([df1, df2,df3,df4], ignore_index=True)
+    previous_file = pd.concat([df1, df2], ignore_index=True)
     return previous_file['job_id'].values.tolist()
 
 #defining global variables to use everywhere
@@ -86,9 +84,9 @@ def open_webpage_sleep(url):
 
 #opening linkedin job page
 def open_linkedin_job_page(num):
-    #url= f"https://www.linkedin.com/jobs/search/?alertAction=viewjobs&geoId=105117694&keywords=sql&origin=JOB_SEARCH_PAGE_SEARCH_BUTTON&refresh=true&start={num}"
+    # get the url  in same format for your job search key words & location. #this url is for data analyst in Sweden(using geoID). 
+    # it is important to have the URL in same format, so you can update the geoID & keyword from your url and keep the remaining same.
     url = f"https://www.linkedin.com/jobs/search/?alertAction=viewjob&geoId=105117694&keywords=data%20analyst&origin=JOBS_HOME_KEYWORD_AUTOCOMPLETE&start={num}"
-    #url = f'https://www.linkedin.com/jobs/search/?alertAction=viewjob&geoId=105117694&keywords=analyst&origin=JOB_SEARCH_PAGE_SEARCH_BUTTON&refresh=true&start={num}'
     open_webpage_sleep(url)
 
 
